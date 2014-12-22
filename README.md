@@ -1,2 +1,4 @@
 This is 3rd weekend project from MA.
-mor et ocome soon..
+Ther will be a user who can order a dish and receive text confirmation if order is correct.
+
+
