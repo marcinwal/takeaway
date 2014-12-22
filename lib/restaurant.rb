@@ -20,4 +20,12 @@ class Restaurant
     end
   end
 
+  def order(user)
+  end
+
+  def text(user)
+  end
+
+  
+
 end
