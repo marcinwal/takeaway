@@ -1,6 +1,7 @@
 class Dish
 
-  DISHES = {fish: 10.5, fries: 2.5, soup: 3.4}
+  DISHES = {fish: 10.5, fries: 2.5, soup: 3.4,desert: 3.99,pizza: 7.99,
+            coffee: 1.99}
 
   attr_reader :name,:price
 
