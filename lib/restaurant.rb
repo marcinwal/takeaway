@@ -20,12 +20,14 @@ class Restaurant
     end
   end
 
-  def order(user)
+  def order(user,order)
+    @users << user unless @users.include?(user)
+    @orders << order
   end
 
   def text(user)
   end
 
-  
+
 
 end
