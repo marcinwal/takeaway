@@ -13,4 +13,13 @@ class Order
   def add_new(positions)
     @order.merge!(positions)
   end
+
+  def items_sum
+    sum = 0
+
+    order.each {|k,v| sum += v unless k == :id}
+    return sum
+    #special id of the order
+  end
+
 end

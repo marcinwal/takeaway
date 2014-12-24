@@ -20,14 +20,17 @@ class Restaurant
     end
   end
 
-  def order(user,order)
+  def order(user,order,sum)
     @users << user unless @users.include?(user)
-    @orders << order
+    @orders << [order,user]
   end
 
   def text(user)
   end
 
+  def order_sum_correct?(order,sum)
+    
+  end
 
 
 end
