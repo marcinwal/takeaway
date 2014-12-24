@@ -7,6 +7,10 @@ describe 'restaurant' do
     expect(restaurant.check_menu(:fish)).to eq(20)
   end
 
+  it 'should be possible to order' do
+    restaurant.order(user,order,sum)
+  end  
+
 
 end
 
