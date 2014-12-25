@@ -6,8 +6,8 @@ class Order
   def initialize(positions,id)
     #byebug
     @order = {}
-    @order.merge!(positions)
     @order.merge!({id: id})
+    @order.merge!(positions)
   end 
   #adding new order to existing one
   def add_new(positions)
@@ -15,11 +15,11 @@ class Order
   end
 
   def items_sum
-    sum = 0
-
-    order.each {|k,v| sum += v unless k == :id}
-    return sum
+    # sum = 0
+    # order.each {|k,v| sum += v unless k == :id}
+    # return sum
     #special id of the order
+    return order.reduce(-order[:id]) { |s,(k,v)| s += v }
   end
 
 end
