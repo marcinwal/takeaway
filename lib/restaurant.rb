@@ -29,7 +29,7 @@ class Restaurant
   end
 
   def order_sum_correct?(order,sum)
-    
+    raise "Wrong check sum " if sum!=order.items_sum
   end
 
 

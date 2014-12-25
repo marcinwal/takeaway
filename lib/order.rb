@@ -4,7 +4,6 @@ class Order
   attr_reader :order
 
   def initialize(id,positions)
-    #byebug
     @order = {}
     @order.merge!({id: id})
     @order.merge!(positions)
@@ -15,10 +14,6 @@ class Order
   end
 
   def items_sum
-    # sum = 0
-    # order.each {|k,v| sum += v unless k == :id}
-    # return sum
-    #special id of the order
     return order.reduce(-order[:id]) { |s,(k,v)| s += v }
   end
 
