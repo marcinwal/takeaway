@@ -3,7 +3,7 @@ require 'byebug'
 class Order
   attr_reader :order
 
-  def initialize(positions,id)
+  def initialize(id,positions)
     #byebug
     @order = {}
     @order.merge!({id: id})
