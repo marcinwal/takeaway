@@ -4,7 +4,7 @@ describe 'restaurant' do
 
   let(:restaurant){Restaurant.new}
   let(:user){double :user}
-  let(:order){double :order}
+  let(:order){double :order,items_sum: 2}
   it 'should have some dishes initially' do
     expect(restaurant.check_menu(:fish)).to eq(20)
   end

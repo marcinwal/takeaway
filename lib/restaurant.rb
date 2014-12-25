@@ -21,6 +21,7 @@ class Restaurant
   end
 
   def order(user,order,sum)
+    order_sum_correct(order,sum)
     @users << user unless @users.include?(user)
     @orders << [order,user]
   end
@@ -28,7 +29,7 @@ class Restaurant
   def text(user)
   end
 
-  def order_sum_correct?(order,sum)
+  def order_sum_correct(order,sum)
     raise "Wrong check sum " if sum!=order.items_sum
   end
 
