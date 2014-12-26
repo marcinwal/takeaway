@@ -1,5 +1,9 @@
+require './lib/twillio.rb'
+
 class Restaurant
   INITIAL = {fish: 20,fries: 40,soup: 30,desert: 30,pizza: 20,coffee: 50 }
+
+  include Twillio
 
   attr_reader :users, :menu, :orders
 
