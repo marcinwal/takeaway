@@ -7,11 +7,11 @@ class Restaurant
 
   attr_reader :users, :menu, :orders, :tel
 
-  def initialize
+  def initialize()
     @users = []
     @menu = []
     @orders = []
-    @tel = '999'
+    @tel = '+441793250218'
     init_menu
     init_twilio
   end
