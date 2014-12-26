@@ -2,6 +2,7 @@ require 'twillio.rb'
 
 class Restaurant
   INITIAL = {fish: 20,fries: 40,soup: 30,desert: 30,pizza: 20,coffee: 50 }
+  DELIVERY_TIME = 3600 #in seconds
 
   include Twillio
 
@@ -29,8 +30,10 @@ class Restaurant
   def order(user,order,sum,confo = false)
     order_sum_correct(order,sum)
     @users << user unless @users.include?(user)
-    @orders << [order,user]
-    twillio_msg(@tel,user.tel,"Thank you!") if confo
+    now = Time.now
+    @orders << [order,user,now]
+    twillio_msg(@tel,user.tel,"Thank you! Your order was placed and will be \ 
+      delivered before #{now + DELIVERY_TIME}") if confo
   end
 
   def order_sum_correct(order,sum)

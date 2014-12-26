@@ -18,5 +18,7 @@ describe 'restaurant' do
     expect {restaurant.order(user,order_2,2)}.to raise_error(RuntimeError,"Wrong check sum ")
   end
 
+  
+
 end
 
