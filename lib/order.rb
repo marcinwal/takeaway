@@ -3,18 +3,17 @@ require 'byebug'
 class Order
   attr_reader :order
 
-  def initialize(id,positions)
+  def initialize(dish,how_many)
     @order = {}
-    @order.merge!({id: id})
-    @order.merge!(positions)
+    @order[dish]=how_many
   end 
   #adding new order to existing one
-  def add_new(positions)
-    @order.merge!(positions)
+  def add_new(dish,how_many)
+    @order[dish] += how_many if @order.key?(dish)
+    @order[dish]=how_many unless @order.key?(dish)
   end
 
   def items_sum
-    return order.reduce(-order[:id]) { |s,(k,v)| s += v }
+    return order.reduce(0) { |s,(k,v)| s += v }
   end
-
 end

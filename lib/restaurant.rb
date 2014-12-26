@@ -1,7 +1,8 @@
-require 'twillio.rb'
+require_relative 'twillio.rb'
 
 class Restaurant
   INITIAL = {fish: 20,fries: 40,soup: 30,desert: 30,pizza: 20,coffee: 50 }
+  PRICES ={fish: 9.0,fries: 2.20,soup: 4.4,desert: 3.99,pizza: 8.99, coffee: 1.99 }
   DELIVERY_TIME = 3600 #in seconds
 
   include Twillio
@@ -10,7 +11,7 @@ class Restaurant
 
   def initialize()
     @users = []
-    @menu = []
+    @menu = {}
     @orders = []
     @tel = '+441793250218'
     init_menu
@@ -18,12 +19,13 @@ class Restaurant
   end
 
   def check_menu(name)
-    @menu.select{|d| d.name == name}.count
+    @menu[name]
   end
 
   def init_menu
     INITIAL.each do |k,v|
-      v.times {@menu << Dish.send(k)}
+      #v.times {@menu << Dish.send(k)}
+      @menu[k] = v
     end
   end
 
@@ -40,8 +42,9 @@ class Restaurant
     raise "Wrong check sum " if sum!=order.items_sum
   end
 
-  def bill(order)
-  end  
 
+  def bill(order)
+    order.order.reduce(0){|sum,(k,v)| sum += v * PRICES[k]}
+  end
 
 end

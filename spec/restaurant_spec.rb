@@ -1,5 +1,5 @@
 require 'restaurant.rb'
-
+require 'order.rb'
 describe 'restaurant' do
 
   let(:restaurant){Restaurant.new}
@@ -18,7 +18,12 @@ describe 'restaurant' do
     expect {restaurant.order(user,order_2,2)}.to raise_error(RuntimeError,"Wrong check sum ")
   end
 
-  
+  it 'should calculate the price' do 
+    ord = Order.new(:fish,2)
+    ord.add_new(:coffee,4)
+    restaurant.order(user,ord,6)
+    expect(restaurant.bill(ord)).to eq(25.96)
+  end  
 
 end
 
