@@ -11,7 +11,8 @@ describe 'restaurant' do
   end
 
   it 'should be possible to order' do
-    restaurant.order(user,order,2)
+    ord = Order.new(:fish,2)
+    restaurant.order(user,ord,2)
   end  
 
   it 'should raise the error if items do not match' do
@@ -24,6 +25,12 @@ describe 'restaurant' do
     restaurant.order(user,ord,6)
     expect(restaurant.bill(ord)).to eq(25.96)
   end  
+
+  it 'should raise the error if food is not on the menu' do 
+    ord = Order.new(:buraki,1)
+    expect{restaurant.order(user,ord,1)}.to raise_error(RuntimeError,"buraki is not on the menu")
+  end
+
 
 end
 

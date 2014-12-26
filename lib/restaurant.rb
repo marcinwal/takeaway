@@ -34,8 +34,17 @@ class Restaurant
     @users << user unless @users.include?(user)
     now = Time.now
     @orders << [order,user,now]
+    reduce_menu(order)
     twillio_msg(@tel,user.tel,"Thank you! Your order was placed and will be \ 
       delivered before #{now + DELIVERY_TIME}") if confo
+  end
+
+  def reduce_menu(order)
+    order.order.each do |name,quant|
+      raise "#{name} is not on the menu" unless menu.key?(name)
+      raise "#{name} is gone" if menu[name] < quant 
+      menu[name] -= quant
+    end
   end
 
   def order_sum_correct(order,sum)
