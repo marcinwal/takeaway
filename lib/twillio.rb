@@ -8,9 +8,7 @@ module Twillio
 
   def init_twilio
     passes = load_passes(PATH)
-    print passes
     @client = Twilio::REST::Client.new passes[:account_sid],passes[:auth_token]
-
   end
 
   def load_passes(path)
@@ -22,6 +20,10 @@ module Twillio
       end  
     end
     return res
+  end
+
+  def load_passes2(path)
+    return Hash[*File.read(PATH).split(/[: \n]+/)]
   end
 
   def twillio_msg(num1,num2,text)

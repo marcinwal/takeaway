@@ -6,7 +6,7 @@ describe 'twillio' do
   let(:twillio){Twillio_test.new}
   it 'shuld load the passwords' do 
     twillio.init_twilio
-    expect(twillio.load_passes('./lib/pass_twilio.md').size).to eq(2)
+    expect(twillio.load_passes2('./lib/pass_twilio.md').size).to eq(2)
   end
 end
 
