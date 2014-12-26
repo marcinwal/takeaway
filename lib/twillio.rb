@@ -4,11 +4,24 @@ require 'twilio-ruby'
 
 
 module Twillio
-  def init_twilio
-    account_sid = 'AC47ed93927854053e432b8b356208f4ee'
-    auth_token = '345019015c1527d9982424277e39bbc1'
-    @client = Twilio::REST::Client.new account_sid,auth_token
+  PATH = './lib/pass_twilio.md'
 
+  def init_twilio
+    passes = load_passes(PATH)
+    print passes
+    @client = Twilio::REST::Client.new passes[:account_sid],passes[:auth_token]
+
+  end
+
+  def load_passes(path)
+    res = {}
+    File.open(path,'r') do |file|
+      file.each_line do |line|
+        line = line.split(':')
+        res[line[0].to_sym]=line[1].chomp
+      end  
+    end
+    return res
   end
 
   def twillio_msg(num1,num2,text)
