@@ -34,9 +34,10 @@ class Restaurant
     @users << user unless @users.include?(user)
     now = Time.now
     @orders << [order,user,now]
+    now += DELIVERY_TIME
     reduce_menu(order)
     twillio_msg(@tel,user.tel,"Thank you! Your order was placed and will be \ 
-      delivered before #{now + DELIVERY_TIME}") if confo
+      delivered before #{now.hour}:#{now.min} for #{'%.2f' % bill(order)} GBP") if confo
   end
 
   def reduce_menu(order)
