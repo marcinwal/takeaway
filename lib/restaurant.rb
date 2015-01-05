@@ -9,7 +9,7 @@ class Restaurant
 
   attr_reader :users, :menu, :orders, :tel
 
-  def initialize(tel)
+  def initialize(tel = '+441793250218')
     @users = []
     @menu = {}
     @orders = []

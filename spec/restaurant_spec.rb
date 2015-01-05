@@ -2,7 +2,7 @@ require 'restaurant.rb'
 require 'order.rb'
 describe 'restaurant' do
 
-  let(:restaurant){Restaurant.new('99999999')}
+  let(:restaurant){Restaurant.new()}
   let(:user){double :user}
   let(:order){double :order,items_sum: 2}
   let(:order_2){double :order_2,items_sum: 3}
