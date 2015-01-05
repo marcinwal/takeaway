@@ -1,14 +1,13 @@
 require_relative 'twillio.rb'
 
 class Restaurant
-  MENU = [{name: price: quanity:},..] # modifiyng menu
   INITIAL = {fish: 20,fries: 40,soup: 30,desert: 30,pizza: 20,coffee: 50 }
   PRICES ={fish: 9.0,fries: 2.20,soup: 4.4,desert: 3.99,pizza: 8.99, coffee: 1.99 }
   DELIVERY_TIME = 3600 #in seconds
 
   include Twillio
 
-  attr_reader :users, :menu, :orders, :tel #take them off
+  attr_reader :users,:orders
 
   def initialize(tel = '+441793250218')
     @users = []
@@ -30,23 +29,32 @@ class Restaurant
     end
   end
 
-  def order(user,order,sum,confo = false)
-    order_sum_correct(order,sum) # to split
+  def add_user(user)
     @users << user unless @users.include?(user)
-    now = Time.now
-    @orders << [order,user,now] # add to order maybe
-    now += DELIVERY_TIME
-    reduce_menu(order)
-    twillio_msg(@tel,user.tel,"Thank you! Your order was placed and will be \ 
-      delivered before #{now.hour}:#{now.min} for #{'%.2f' % bill(order)} GBP") if confo
-    # to move to twillio
   end
 
-  def reduce_menu(order)  #items 
-    order.order.each do |name,quant|
-      raise "#{name} is not on the menu" unless menu.key?(name)
-      raise "#{name} is gone" if menu[name] < quant #should send a message to the user ..
-      menu[name] -= quant
+  def add_order(order,user,time)
+    @orders << [order,user,time] # add to order maybe
+  end  
+
+  def take_time()
+    return Time.now + DELIVERY_TIME
+  end  
+
+  def order(user,order,sum,confo = false)
+    order_sum_correct(order,sum) # to split
+    add_user(user)
+    delivery= take_time
+    add_order(order,user,delivery)
+    reduce_menu(order)
+    twillio_msg_time(@tel,user.tel,delivery,bill(order)) if confo
+  end
+
+  def reduce_menu(item)  #items 
+    item.order.each do |name,quant|
+      raise "#{name} is not on the menu" unless @menu.key?(name)
+      raise "#{name} is gone" if @menu[name] < quant #should send a message to the user ..
+      @menu[name] -= quant
     end
   end
 

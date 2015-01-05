@@ -32,8 +32,8 @@ describe 'restaurant' do
   end
 
   it 'should send a message' do
-    allow(restaurant).to receive(:twillio_msg).and_return(true)
-    expect(restaurant.twillio_msg('999','999','text')).to eq(true)
+    allow(restaurant).to receive(:twillio_msg_time).and_return(true)
+    expect(restaurant.twillio_msg_time('999','999','text',25)).to eq(true)
   end
 
 
