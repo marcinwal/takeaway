@@ -43,7 +43,7 @@ class Restaurant
   def reduce_menu(order)
     order.order.each do |name,quant|
       raise "#{name} is not on the menu" unless menu.key?(name)
-      raise "#{name} is gone" if menu[name] < quant 
+      raise "#{name} is gone" if menu[name] < quant #should send a message to the user ..
       menu[name] -= quant
     end
   end
