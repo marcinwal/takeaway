@@ -8,5 +8,11 @@ describe 'twillio' do
     twillio.init_twilio
     expect(twillio.load_passes2('./lib/pass_twilio.md').size).to eq(2)
   end
+
 end
+
+
+
+# add allow for twillio checks   if they are ok
+#test all the mtethods
 

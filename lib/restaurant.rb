@@ -1,13 +1,14 @@
 require_relative 'twillio.rb'
 
 class Restaurant
+  MENU = [{name: price: quanity:},..] # modifiyng menu
   INITIAL = {fish: 20,fries: 40,soup: 30,desert: 30,pizza: 20,coffee: 50 }
   PRICES ={fish: 9.0,fries: 2.20,soup: 4.4,desert: 3.99,pizza: 8.99, coffee: 1.99 }
   DELIVERY_TIME = 3600 #in seconds
 
   include Twillio
 
-  attr_reader :users, :menu, :orders, :tel
+  attr_reader :users, :menu, :orders, :tel #take them off
 
   def initialize(tel = '+441793250218')
     @users = []
@@ -30,17 +31,18 @@ class Restaurant
   end
 
   def order(user,order,sum,confo = false)
-    order_sum_correct(order,sum)
+    order_sum_correct(order,sum) # to split
     @users << user unless @users.include?(user)
     now = Time.now
-    @orders << [order,user,now]
+    @orders << [order,user,now] # add to order maybe
     now += DELIVERY_TIME
     reduce_menu(order)
     twillio_msg(@tel,user.tel,"Thank you! Your order was placed and will be \ 
       delivered before #{now.hour}:#{now.min} for #{'%.2f' % bill(order)} GBP") if confo
+    # to move to twillio
   end
 
-  def reduce_menu(order)
+  def reduce_menu(order)  #items 
     order.order.each do |name,quant|
       raise "#{name} is not on the menu" unless menu.key?(name)
       raise "#{name} is gone" if menu[name] < quant #should send a message to the user ..

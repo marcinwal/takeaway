@@ -31,6 +31,11 @@ describe 'restaurant' do
     expect{restaurant.order(user,ord,1)}.to raise_error(RuntimeError,"buraki is not on the menu")
   end
 
+  it 'should send a message' do
+    allow(restaurant).to receive(:twillio_msg).and_return(true)
+    expect(restaurant.twillio_msg('999','999','text')).to eq(true)
+  end
+
 
 end
 

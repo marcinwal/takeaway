@@ -1,8 +1,6 @@
 require 'rubygems'
 require 'twilio-ruby'
 
-
-
 module Twillio
   PATH = './lib/pass_twilio.md'
 
@@ -20,6 +18,10 @@ module Twillio
       end  
     end
     return res
+  end
+
+  def client
+    return @client
   end
 
   def load_passes2(path)
