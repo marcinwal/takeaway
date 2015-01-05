@@ -3,7 +3,7 @@ require 'order.rb'
 describe 'restaurant' do
 
   let(:restaurant){Restaurant.new()}
-  let(:user){double :user}
+  let(:user){double :user,tel: '999'}
   let(:order){double :order,items_sum: 2}
   let(:order_2){double :order_2,items_sum: 3}
   it 'should have some dishes initially' do
@@ -32,8 +32,9 @@ describe 'restaurant' do
   end
 
   it 'should send a message' do
+    ord = Order.new(:fish,2)
     allow(restaurant).to receive(:twillio_msg_time).and_return(true)
-    expect(restaurant.twillio_msg_time('999','999','text',25)).to eq(true)
+    expect(restaurant.order(user,ord,2,true)).to eq(true)
   end
 
 
